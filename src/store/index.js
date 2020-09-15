@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { api } from '../services/AxiosService'
+import { api, sandbox } from '../services/AxiosService'
 
 Vue.use(Vuex)
 
@@ -24,16 +24,22 @@ export default new Vuex.Store({
   // NOTE actions are called by "dispatch" (actions[movieSearch]())
   actions: {
     // NOTE the first parameter is the VueMagic
-    async movieSearch({ commit, dispatch }, query) {
+    async movieSearch({ commit }, query) {
       let res = await api.get(key + query)
       // NOTE 'commit' triggers mutations
       commit("setMovies", res.data.results)
+      commit("setActiveMovie", {})
     },
 
-    setActiveMovie({ commit, dispatch }, movie) {
+    setActiveMovie({ commit }, movie) {
       commit("setActiveMovie", movie)
+    },
+
+
+
+    async getCars() {
+      let res = await sandbox.get('class/spells')
+      console.log(res.data.data)
     }
-  },
-  modules: {
   }
 })

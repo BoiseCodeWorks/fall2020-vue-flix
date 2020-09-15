@@ -1,13 +1,14 @@
 <template>
   <div class="movie">
-    <div class="media" @click="setActive">
+    <div class="media p-2 m-1 border" @click="setActive">
+      {{index+1}}.
       <img
         v-if="movieData.poster_path"
         :src="'https://image.tmdb.org/t/p/w500'+movieData.poster_path"
         width="50px"
       />
       <img v-else src="//placehold.it/50x50" alt />
-      <div class="media-body">
+      <div class="media-body ml-1">
         <h5>{{movieData.title}}</h5>
         <p class="truncate">{{movieData.overview}}</p>
       </div>
@@ -17,7 +18,7 @@
 
 <script>
 export default {
-  props: ["movieData"],
+  props: ["movieData", "index"],
   data() {
     return {
     }

@@ -22,7 +22,7 @@
     <!-- NOTE props are data passed to child from the parent component -->
     <div class="row">
       <div class="col-6">
-        <movie v-for="movie in movies" :key="movie.id" :movieData="movie" />
+        <movie v-for="(movie, index) in movies" :key="movie.id" :index="index" :movieData="movie" />
       </div>
       <div class="col-6">
         <movie-details />
@@ -36,6 +36,9 @@ import Movie from "../components/Movie.vue"
 import MovieDetails from "../components/MovieDetails.vue"
 export default {
   name: "home",
+  mounted() {
+    this.$store.dispatch("getCars")
+  },
   data() {
     return {
       query: '',
@@ -55,6 +58,9 @@ export default {
     // NOTE computeds act as variables within the templtate
     movies() {
       return this.$store.state.searchResults
+    },
+    cars() {
+      return []
     }
   },
   components: {
